@@ -72,29 +72,38 @@ public class MoviesService {
         movies1.setRating(9.3);
         movies1.setReleaseYear(1994);
         movies1.setGenre("Drama");
+        moviesRepository.save(movies1);
+
         Movies movies2 = new Movies();
         movies2.setTitle("The Godfather");
         movies2.setDirector("Francis Ford Coppola");
         movies2.setRating(9.2);
         movies2.setReleaseYear(1972);
         movies2.setGenre("Crime, Drama");
+        moviesRepository.save(movies2);
+
         Movies movies3 = new Movies();
         movies3.setTitle("The Dark Knight");
         movies3.setDirector("Christopher Nolan");
         movies3.setRating(9.0);
         movies3.setReleaseYear(2008);
         movies3.setGenre("Action, Crime, Drama");
+        moviesRepository.save(movies3);
+
         Movies movies4 = new Movies();
         movies4.setTitle("The Lord of the Rings: The Return of the King");
         movies4.setDirector("Peter Jackson");
         movies4.setRating(8.9);
         movies4.setReleaseYear(2003);
         movies4.setGenre("Action, Adventure, Drama");
+        moviesRepository.save(movies4);
+
         Movies movies5 = new Movies();
         movies5.setTitle("Pulp Fiction");
         movies5.setDirector("Quentin Tarantino");
         movies5.setRating(8.9);
         movies5.setReleaseYear(1994);
         movies5.setGenre("Crime, Drama");
+        moviesRepository.save(movies5);
     }
 }
