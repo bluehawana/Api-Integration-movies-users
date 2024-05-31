@@ -32,27 +32,20 @@ public class AuthenticationService {
 
     public User signup(RegisterUserDto input) {
         // TODO: Implement function
-        User user = User.builder()
-                .email(input.getEmail())
-                .password(passwordEncoder.encode(input.getPassword()))
-                .fullName(input.getFullName())
-                .build();
+        User user = new User();
+        user.setEmail(input.getEmail());
+        user.setPassword(passwordEncoder.encode(input.getPassword()));
         return userRepository.save(user);
     }
+
+
     public User authenticate(LoginUserDto input) {
         // TODO: Implement function
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        input.getEmail(),
-                        input.getPassword()
-                )
+                new UsernamePasswordAuthenticationToken(input.getUsername(), input.getPassword())
         );
-        User user = userRepository.findByEmail(input.getEmail())
-                .orElseThrow(() -> new NoSuchElementException("User not found"));
-
-        String token = jwtService.generateToken(user);
-        long expiresIn = jwtService.getExpirationTime();
-
-        return user;
+        return userRepository.findByEmail(input.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
+
