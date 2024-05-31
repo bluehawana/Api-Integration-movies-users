@@ -11,7 +11,7 @@ import se.dsve.movies.model.LoginResponse;
 import se.dsve.movies.model.User;
 import se.dsve.movies.repository.UserRepository;
 import java.util.NoSuchElementException;
-
+import se.dsve.movies.services.JwtService;
 
 @Service
 public class AuthenticationService {
@@ -40,12 +40,14 @@ public class AuthenticationService {
 
 
     public User authenticate(LoginUserDto input) {
-        // TODO: Implement function
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(input.getUsername(), input.getPassword())
         );
         return userRepository.findByEmail(input.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
-}
 
+    private String generateToken(User user) {
+        return "token";
+    }
+}

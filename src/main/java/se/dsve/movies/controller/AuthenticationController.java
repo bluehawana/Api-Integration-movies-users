@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import se.dsve.movies.dtos.LoginUserDto;
 import se.dsve.movies.dtos.RegisterUserDto;
-import se.dsve.movies.model.LoginResponse;
 import se.dsve.movies.model.User;
 import se.dsve.movies.services.AuthenticationService;
 import se.dsve.movies.services.JwtService;
@@ -33,9 +32,9 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
+    public ResponseEntity<User> authenticate(@RequestBody LoginUserDto loginUserDto) {
         // TODO: Implement function
-        User user = authenticationService.authenticate(loginUserDto);
-        return new ResponseEntity<>(new LoginResponse(jwtService.generateToken(user), jwtService.getExpirationTime()), HttpStatus.OK);
+        User loginResponse = authenticationService.authenticate(loginUserDto);
+        return ResponseEntity.ok(loginResponse);
     }
 }
