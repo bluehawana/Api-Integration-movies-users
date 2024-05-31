@@ -27,11 +27,18 @@ public class AuthenticationService {
 
     public User signup(RegisterUserDto input) {
         // TODO: Implement function
-        return null;
+        User user = new User();
+        user.setEmail(input.getEmail());
+        user.setPassword(passwordEncoder.encode(input.getPassword()));
+        return userRepository.save(user);
     }
 
     public User authenticate(LoginUserDto input) {
         // TODO: Implement function
-        return null;
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(input.getUsername(), input.getPassword())
+        );
+        return userRepository.findByEmail(input.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }

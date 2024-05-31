@@ -23,24 +23,27 @@ public class ApplicationConfiguration {
     @Bean
     UserDetailsService userDetailsService() {
         // TODO: Implement function
-        return null;
-    }
+        return username -> userRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));}
 
     @Bean
     BCryptPasswordEncoder passwordEncoder() {
         // TODO: Implement function
-        return null;
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         // TODO: Implement function
-        return null;
+        return config.getAuthenticationManager();
     }
 
     @Bean
     AuthenticationProvider authenticationProvider() {
         // TODO: Implement function
-        return null;
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService());
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
     }
 }

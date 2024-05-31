@@ -1,5 +1,6 @@
 package se.dsve.movies.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,12 +28,14 @@ public class AuthenticationController {
     @PostMapping("/signup")
     public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
         // TODO: Implement function
-        return null;
+        User user = authenticationService.signup(registerUserDto);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
         // TODO: Implement function
-        return null;
+        User user = authenticationService.authenticate(loginUserDto);
+        return new ResponseEntity<>(new LoginResponse(jwtService.generateToken(user), jwtService.getExpirationTime()), HttpStatus.OK);
     }
 }

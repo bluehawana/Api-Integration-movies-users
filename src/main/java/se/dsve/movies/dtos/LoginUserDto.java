@@ -9,4 +9,9 @@ import lombok.NoArgsConstructor;
 public class LoginUserDto {
     private String email;
     private String password;
+
+    public String getUsername() {
+        return email;
+    }
+
 }
