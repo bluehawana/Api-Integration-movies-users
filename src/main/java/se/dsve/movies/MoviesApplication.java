@@ -10,8 +10,6 @@ public class MoviesApplication {
 
  public static void main(String[] args) {
   ApplicationContext context = SpringApplication.run(MoviesApplication.class, args);
-  MoviesService moviesService = context.getBean(MoviesService.class);
-  moviesService.addPredefinedMovies();
  }
 
 }

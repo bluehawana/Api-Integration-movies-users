@@ -48,7 +48,7 @@ public class MoviesController {
     public ResponseEntity<Void> addPredefinedMovies() {
         // TODO: Implement function
         moviesService.addPredefinedMovies();
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
