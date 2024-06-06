@@ -9,6 +9,8 @@ import se.dsve.movies.dtos.RegisterUserDto;
 import se.dsve.movies.model.User;
 import se.dsve.movies.repository.UserRepository;
 
+import java.util.NoSuchElementException;
+
 @Service
 public class AuthenticationService {
     private final UserRepository userRepository;
@@ -37,6 +39,6 @@ public class AuthenticationService {
                 new UsernamePasswordAuthenticationToken(input.getUsername(), input.getPassword())
         );
         return userRepository.findByEmail(input.getUsername())
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new NoSuchElementException("User not found"));
     }
 }
