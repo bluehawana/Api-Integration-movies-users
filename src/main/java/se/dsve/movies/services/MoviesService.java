@@ -1,6 +1,8 @@
 package se.dsve.movies.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.stereotype.Service;
 import se.dsve.movies.dtos.MoviesDto;
 import se.dsve.movies.exceptions.ResourceNotFoundException;
@@ -20,6 +22,11 @@ public class MoviesService {
         this.moviesRepository = moviesRepository;
     }
 
+    @EventListener(ApplicationReadyEvent.class)
+    public void initializeMovies() {
+        addPredefinedMovies();
+    }
+
     public List<Movies> getAllMovies() {
         // TODO: Implement function
         return moviesRepository.findAll();
@@ -36,7 +43,7 @@ public class MoviesService {
         movies.setTitle(moviesDto.getTitle());
         movies.setDirector(moviesDto.getDirector());
         movies.setRating(moviesDto.getRating());
-        movies.getReleaseYear();
+        movies.setReleaseYear(moviesDto.getReleaseYear());
         movies.setGenre(moviesDto.getGenre());
         return moviesRepository.save(movies);
 
@@ -48,7 +55,7 @@ public class MoviesService {
         movies.setTitle(moviesDto.getTitle());
         movies.setDirector(moviesDto.getDirector());
         movies.setRating(moviesDto.getRating());
-        movies.getReleaseYear();
+        movies.setReleaseYear(moviesDto.getReleaseYear());
         movies.setGenre(moviesDto.getGenre());
         return moviesRepository.save(movies);
     }
