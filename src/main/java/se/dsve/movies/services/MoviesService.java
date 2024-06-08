@@ -63,7 +63,7 @@ public class MoviesService {
     public void deleteMovies(Long id) {
         // TODO: Implement function
         Movies movie = this.getMoviesOrFail(id);
-        moviesRepository.deleteById(id);
+        moviesRepository.delete(movie);
     }
 
     private Movies getMoviesOrFail(Long id) {
